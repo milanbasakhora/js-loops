@@ -1,16 +1,30 @@
-const cats = ["Leopard", "Serval", "Jaguar", "Tiger", "Caracal", "Lion"];
+const contacts = [
+  "Chris: 2232322",
+  "Sarah:3453456",
+  "Bill:7654322",
+  "Mary:9998769",
+  "Dianne:9384975",
+];
 
-const paragElem = document.querySelector("p");
+const parag = document.querySelector("p");
+const input = document.querySelector("input");
+const btn = document.querySelector("button");
 
-let myFavoriteCats = "My favorite big cats are ";
+btn.addEventListener("click", () => {
+  const searchName = input.value.toLowerCase();
+  input.value = "";
+  parag.textContent = "";
+  input.focus();
 
-for(let i=0;i<cats.length;i++){
-    if(i === cats.length -1){
-        myFavoriteCats += `and ${cats[i]}.`; 
+  for (const contact of contacts) {
+    // const [name, number] = contact.split(":");
+    const splitContact = contact.split(":");
+    if (splitContact[0].toLowerCase() === searchName){
+        parag.textContent = `${splitContact[0]}'s number is ${splitContact[1]}`;
+        break;
     }
-    else{
-        myFavoriteCats += `${cats[i]}, `;
-    }
-}
-
-paragElem.textContent = myFavoriteCats;
+  }
+  if(parag.textContent === ""){
+    parag.textContent = "Contact not found.";
+  }
+});
