@@ -1,30 +1,41 @@
-const contacts = [
-  "Chris: 2232322",
-  "Sarah:3453456",
-  "Bill:7654322",
-  "Mary:9998769",
-  "Dianne:9384975",
-];
+// Change to uppercase
 
 const parag = document.querySelector("p");
-const input = document.querySelector("input");
-const btn = document.querySelector("button");
+const up = document.getElementById("uppercase");
+const low = document.getElementById("lowercase");
+const reset = document.getElementById("reset");
 
-btn.addEventListener("click", () => {
-  const searchName = input.value.toLowerCase();
-  input.value = "";
-  parag.textContent = "";
-  input.focus();
+function toUpper(arr) {
+  return arr.toUpperCase();
+}
 
-  for (const contact of contacts) {
-    // const [name, number] = contact.split(":");
-    const splitContact = contact.split(":");
-    if (splitContact[0].toLowerCase() === searchName){
-        parag.textContent = `${splitContact[0]}'s number is ${splitContact[1]}`;
-        break;
+function toLower(arr){
+    return arr.toLowerCase();
+}
+
+function displayCats(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (i === arr.length - 1) {
+      parag.textContent += `${arr[i]}.`;
+    } else {
+      parag.textContent += `${arr[i]}, `;
     }
   }
-  if(parag.textContent === ""){
-    parag.textContent = "Contact not found.";
-  }
+}
+const cats = ["Leopard", "Serval", "Jaguar", "Tiger", "Caracal", "Lion"];
+displayCats(cats);
+
+up.addEventListener("click", () => {
+  parag.textContent = "";
+  displayCats(cats.map(toUpper));
 });
+
+low.addEventListener("click", function(){
+    parag.textContent = "";
+    displayCats(cats.map(toLower));
+})
+
+reset.addEventListener("click", ()=>{
+    parag.textContent = "";
+    displayCats(cats);
+})
