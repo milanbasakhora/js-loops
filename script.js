@@ -1,17 +1,10 @@
 // Change to uppercase
 
 const parag = document.querySelector("p");
-const up = document.getElementById("uppercase");
-const low = document.getElementById("lowercase");
-const reset = document.getElementById("reset");
 
-function toUpper(arr) {
-  return arr.toUpperCase();
-}
-
-function toLower(arr){
-    return arr.toLowerCase();
-}
+const filterInput = document.getElementById("filterInput");
+const filterBtn = document.getElementById("filterButton");
+const filteredTxt = document.getElementById("filteredText");
 
 function displayCats(arr) {
   for (let i = 0; i < arr.length; i++) {
@@ -22,20 +15,18 @@ function displayCats(arr) {
     }
   }
 }
+
+function filterCats(cat){
+    return cat.startsWith(filterInput.value);
+}
 const cats = ["Leopard", "Serval", "Jaguar", "Tiger", "Caracal", "Lion"];
+
 displayCats(cats);
 
-up.addEventListener("click", () => {
-  parag.textContent = "";
-  displayCats(cats.map(toUpper));
-});
+function showFilteredCats(){
+    filteredTxt.textContent = cats.filter(filterCats).join(", ");
+}
 
-low.addEventListener("click", function(){
-    parag.textContent = "";
-    displayCats(cats.map(toLower));
-})
-
-reset.addEventListener("click", ()=>{
-    parag.textContent = "";
-    displayCats(cats);
+filterBtn.addEventListener("click", ()=>{
+    showFilteredCats();
 })
